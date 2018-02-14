@@ -1,0 +1,37 @@
+General Information about the project:
+
+1. Access to http://automationpractice.com:
+
+username: borza.laurentiu@gmail.com
+passsword: BJSSTest
+
+2. Project created following POM (Page Object Model)
+
+        a. TestStore.java is the main class containing the 3 required tests: 
+
+        1. Happy Path (Purchase of 2 items) (see method test1HappyPath());
+        2. Review the Order and Add a Message (see method test2ReviewOrderAndAddMessage());
+        3. Capture Image (see method test3CaptureImages());
+        
+        Tests 1,2 and 3 are interlinked to each other, hence they must be run in consecutive order.
+
+        It also defines the method captureScreenshot() that captures the screengrab on the failure of the assertment "This             comment should not exist in the Messages table". The captureScreenshot() method is called in the @AfterMethod                 tearDown() method.
+        
+        b. PageObject.java is the superclass for all the java classes grouped in the PageObjects package, and initiates the              webdriver.
+        
+        c. MyAccountPage.java sets the action of clicking on the OrderHistory button.
+        
+        d. ProductsPage.java sets the actions of hovering over a product in the store and clicking on the QuickView feature.
+        
+        e. QuickView.java sets the actions of switching to the QuickView frame when purchasing a product, selecting the size              of the product, adding it to cart and clicking on the "Continue Shopping" and "Proceed to Checkout" events.
+        
+        f. ShoppingCartPage.java defines the events related to the Shopping Cart.
+        
+        g. ShoppingSummaryCartProduct.java defines specific actions for the Summary before Checkout, as required in the                  instructions for Test 1.
+        
+        h. SignIn.java defines the actions related to signing in, as required in the instructions for Test 2 and 3. 
+        
+        i. OrdersHistory.java in the MyAccount package defines the events related to checking the Order History, including                leaving a text comment, as required in the instructions for Test 2.
+        
+Issues encountered:
+The website is making heavy use of floating panels, hence it requires a bit more care when using Selenium since elements need to be ready to go before interacting with them; it's often the case that Selenium by default finds these elements quickly before JavaScript has completed and they often are not in a ready to use state. I have tried to fix this by using the class WebDriverWait extensively, but this solution may increase the time required for the tests to run, which is not very feasible in a big test suite.
